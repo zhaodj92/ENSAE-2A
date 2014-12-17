@@ -6,16 +6,17 @@ using namespace std;
 #ifndef Building_H
 #define Building_H
 
-class Building:public Person
+class Building
 {
 public:
 	int x;				//coordinate
 	int y;
-	char type;			//home school bureau store bus...
+	string type;			//home school bureau store bus...
 	int buildingID;
 	int numOfSicks;
+	float coefficient;
 	
-	Building(int,int,const char,int,int);
+	Building();//int,int,string,int,int,float);
 	~Building(void);
 	void functionInBuiding();
 };
