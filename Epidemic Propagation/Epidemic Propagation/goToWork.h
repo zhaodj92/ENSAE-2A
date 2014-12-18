@@ -14,6 +14,7 @@ public:
 	GoToWork();
 	~GoToWork(void);
 
+	void createTrajectory();
 };
 
 #endif

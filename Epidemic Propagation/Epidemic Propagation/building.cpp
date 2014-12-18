@@ -5,9 +5,15 @@
 
 Building::Building()
 {
-	type = "office";
+	buildingID = 1;
 }
 
 Building::~Building(void)
 {
+}
+
+void creatBuidings(int,int)
+{
+
+
 }

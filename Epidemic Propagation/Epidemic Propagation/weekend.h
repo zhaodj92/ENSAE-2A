@@ -14,6 +14,7 @@ public:
 	Weekend();
 	~Weekend(void);
 
+	void createTrajectory();
 };
 
 #endif

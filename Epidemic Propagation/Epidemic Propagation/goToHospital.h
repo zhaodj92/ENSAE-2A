@@ -14,6 +14,7 @@ public:
 	GoToHospital();
 	~GoToHospital(void);
 
+	void createTrajectory();
 };
 
 #endif

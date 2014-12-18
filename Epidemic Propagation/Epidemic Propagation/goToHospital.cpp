@@ -7,7 +7,11 @@
 
 GoToHospital::GoToHospital()
 {
-	trajectoryID=1;
+	trajectoryID=1;			//test
+	for (int i=0;i<14;i++)
+	{
+		action[i]=0;
+	}
 }
 
 GoToHospital::~GoToHospital(void)

@@ -11,6 +11,7 @@ class Trajectory
 public:
 	Trajectory();
 	~Trajectory(void);
+
 };
 
 #endif

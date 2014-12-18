@@ -24,7 +24,7 @@ public:
 
 	Person();//string,int,int,int,int,bool,float,int,int,int);
 	~Person(void);
-	void functionInPerson();
+	void createOnePerson(string,int,int);		//age,homeID,workID
 	
 };
 

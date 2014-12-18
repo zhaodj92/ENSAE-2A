@@ -9,16 +9,17 @@ using namespace std;
 class Building
 {
 public:
+	int zoneID;
 	int x;				//coordinate
 	int y;
-	string type;			//home school bureau store bus...
+	//string type;			//home school bureau store bus...
 	int buildingID;
 	int numOfSicks;
-	float coefficient;
+	//float coefficient;
 	
 	Building();//int,int,string,int,int,float);
 	~Building(void);
-	void functionInBuiding();
+	void createBuidings(int,int);//,string,float);		// zoneID,number of buildings of this type, //type, coefficient
 };
 
 
