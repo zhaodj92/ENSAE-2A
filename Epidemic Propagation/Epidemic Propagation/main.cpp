@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <time.h>
 
 #include "person.h"	
 #include "building.h"
@@ -9,38 +10,38 @@
 #include "goToHospital.h"
 #include "goToWork.h"
 #include "weekend.h"
+
+#include "functions.h"
 ;using namespace std;
+
+
+//next work to do: code the programme to create all trajectories
 
 
 void main()
 {
-	string age="child";
-	int homeID=100;
-	int workID=200;
-	Person a;
-	a.createOnePerson(age,homeID,workID);
-	cout << a.age <<endl;
-
-
-	GoToHospital work1;
-	cout << work1.trajectoryID <<endl; 
-	cout << work1.action[1] <<endl;
-
-
-	//system("pause");
-
-
 	//beginning of code
 	//city size
-	int numOfPersons;
-	cin >> numOfPersons;
+	int numOfChildren;
+	cout << "please enter the number of CHILDREN you want to create"<<endl;
+	cin >> numOfChildren;
+	int numOfAdults;
+	cout << "please enter the number of ADULTS you want to create"<<endl;
+	cin >> numOfAdults;
+	int numOfOlds;
+	cout << "please enter the number of OLDS you want to create"<<endl;
+	cin >> numOfOlds;
 	vector<Person> VILLIGERS;
+	VILLIGERS=createPersons(VILLIGERS,numOfChildren,numOfAdults,numOfOlds);
+
 	//test
-	VILLIGERS.push_back(a);
-	cout << VILLIGERS[0].age <<endl;
-	vector<int> intV;
-	intV.push_back(1);
-	cout << intV[0];
+	cout << VILLIGERS[3].age<< endl;
+	cout << VILLIGERS[15].age<< endl;
+	cout << VILLIGERS[24].age<< endl;
+
+	srand( (unsigned)time( NULL ) );
+	float n=rand()%101/100.0;
+	cout << n<<endl;
 
 	system("pause");
 	//end of test
@@ -51,14 +52,43 @@ void main()
 	vector<Building> HOSPITALS;
 	vector<Building> SCHOOLS;
 	vector<Building> PARCS;
+	vector<Building> BUSES;
 	int numOfZones;
 	cin >> numOfZones;
-	for (int i=1;i <= numOfZones;i++ )
+	int BuilingNum=10;						//this variable is the number of buildings which were already created +10
+	for (int i=1;i <= numOfZones;i++ )	//i is zoneID
 	{
 		int j;
-
+		cout << "please enter the number of HOMES you want to create in zone"<< i << endl;
+		cin >> j;
+		HOMES=createBuildings(HOMES,i,j,BuilingNum);
+		cout << "please enter the number of OFFICES you want to create in zone"<< i << endl;
+		cin >> j;
+		OFFICES=createBuildings(OFFICES,i,j,BuilingNum);
+		cout << "please enter the number of STORES you want to create in zone"<< i << endl;
+		cin >> j;
+		STORES=createBuildings(STORES,i,j,BuilingNum);
+		cout << "please enter the number of HOSPITALS you want to create in zone"<< i << endl;
+		cin >> j;
+		HOSPITALS=createBuildings(HOSPITALS,i,j,BuilingNum);
+		cout << "please enter the number of SCHOOLS you want to create in zone"<< i << endl;
+		cin >> j;
+		SCHOOLS=createBuildings(SCHOOLS,i,j,BuilingNum);
+		cout << "please enter the number of PARCS you want to create in zone"<< i << endl;
+		cin >> j;
+		PARCS=createBuildings(PARCS,i,j,BuilingNum);
+		cout << "please enter the number of BUSES you want to create in zone"<< i << endl;
+		cin >> j;
+		BUSES=createBuildings(BUSES,i,j,BuilingNum);
 	}
 	
+	//creation of trajectories
+	vector<GoToWork> GOTOWORK;
+	vector<GoToHospital> GOTOHOSPITAL;
+	vector<Weekend> WEEKEND;
+	GOTOWORK=createGoToWork(GOTOWORK);
+	GOTOHOSPITAL=createGoToHospital(GOTOHOSPITAL);
+	WEEKEND=createWeekend(WEEKEND);
 
 	system("pause");
 

@@ -19,7 +19,7 @@ public:
 	
 	Building();//int,int,string,int,int,float);
 	~Building(void);
-	void createBuidings(int,int);//,string,float);		// zoneID,number of buildings of this type, //type, coefficient
+	void createOneBuiding(int);//,string,float);		// zoneID, coefficient
 };
 
 

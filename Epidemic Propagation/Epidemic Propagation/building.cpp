@@ -12,7 +12,7 @@ Building::~Building(void)
 {
 }
 
-void creatBuidings(int,int)
+void creatOneBuiding(int)
 {
 
 

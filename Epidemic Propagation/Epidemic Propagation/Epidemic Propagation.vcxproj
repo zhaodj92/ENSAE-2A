@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="building.h" />
+    <ClInclude Include="functions.h" />
     <ClInclude Include="goToHospital.h" />
     <ClInclude Include="goToWork.h" />
     <ClInclude Include="person.h" />
@@ -20,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="building.cpp" />
+    <ClCompile Include="functions.cpp" />
     <ClCompile Include="goToHospital.cpp" />
     <ClCompile Include="goToWork.cpp" />
     <ClCompile Include="main.cpp" />

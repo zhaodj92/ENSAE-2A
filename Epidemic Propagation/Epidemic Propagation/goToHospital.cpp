@@ -8,7 +8,7 @@
 GoToHospital::GoToHospital()
 {
 	trajectoryID=1;			//test
-	for (int i=0;i<14;i++)
+	for (int i=0;i<30;i++)
 	{
 		action[i]=0;
 	}

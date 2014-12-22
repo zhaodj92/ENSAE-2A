@@ -8,8 +8,8 @@ using namespace std;
 class GoToHospital:public Trajectory
 {
 public:
-	int trajectoryID;
-	int action[14];			//list of actions the person do at each hour
+	int trajectoryID;		//unnecessary
+	int action[30];			//list of actions the person do at each hour
 
 	GoToHospital();
 	~GoToHospital(void);
