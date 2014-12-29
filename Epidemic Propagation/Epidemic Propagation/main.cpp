@@ -15,11 +15,18 @@
 ;using namespace std;
 
 
-//next work to do: code the programme to create all trajectories
+//next work to do: code the programme to define everyone's home and work
 
 
 void main()
 {
+	//test
+
+	
+	//end
+
+	//random
+	srand( (unsigned)time( NULL ) );
 	//beginning of code
 	//city size
 	int numOfChildren;
@@ -39,11 +46,10 @@ void main()
 	cout << VILLIGERS[15].age<< endl;
 	cout << VILLIGERS[24].age<< endl;
 
-	srand( (unsigned)time( NULL ) );
+
 	float n=rand()%101/100.0;
 	cout << n<<endl;
 
-	system("pause");
 	//end of test
 
 	vector<Building> HOMES;
@@ -54,6 +60,7 @@ void main()
 	vector<Building> PARCS;
 	vector<Building> BUSES;
 	int numOfZones;
+	cout << "please enter the number of zones you want to create"<< endl;
 	cin >> numOfZones;
 	int BuilingNum=10;						//this variable is the number of buildings which were already created +10
 	for (int i=1;i <= numOfZones;i++ )	//i is zoneID
@@ -82,13 +89,34 @@ void main()
 		BUSES=createBuildings(BUSES,i,j,BuilingNum);
 	}
 	
+
 	//creation of trajectories
 	vector<GoToWork> GOTOWORK;
 	vector<GoToHospital> GOTOHOSPITAL;
 	vector<Weekend> WEEKEND;
+	cout << "ok"<< endl;
 	GOTOWORK=createGoToWork(GOTOWORK);
+	cout << "ok"<< endl;
 	GOTOHOSPITAL=createGoToHospital(GOTOHOSPITAL);
+	cout << "ok"<< endl;
 	WEEKEND=createWeekend(WEEKEND);
+	cout << "ok" << endl;
+
+	//define everyone's home and work
+	VILLIGERS=defineHome_Work(VILLIGERS,HOMES.size(),OFFICES.size(),SCHOOLS.size());
+
+	cout<< "ok" << endl;
+	//test
+
+	cout<< VILLIGERS[1].homeID <<endl;
+	cout<< VILLIGERS[2].homeID <<endl;
+	cout<< VILLIGERS[3].homeID <<endl;
+	cout<< VILLIGERS[4].homeID <<endl;
+	cout<< VILLIGERS[5].homeID <<endl;
+	cout<< VILLIGERS[6].homeID <<endl;
+	cout<< VILLIGERS[7].homeID <<endl;
+
+	//end of test
 
 	system("pause");
 

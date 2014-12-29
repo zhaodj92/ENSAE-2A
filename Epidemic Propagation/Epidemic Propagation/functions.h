@@ -17,3 +17,5 @@ vector<Person> createPersons(vector<Person>,int,int,int);		//number of children,
 vector<GoToWork> createGoToWork(vector<GoToWork>);
 vector<GoToHospital> createGoToHospital(vector<GoToHospital>);
 vector<Weekend> createWeekend(vector<Weekend>);
+
+vector<Person> defineHome_Work(vector<Person>,int,int,int);	//number of Homes, Offices, Schools
