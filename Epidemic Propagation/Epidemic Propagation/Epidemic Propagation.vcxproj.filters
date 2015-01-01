@@ -24,15 +24,6 @@
     <ClInclude Include="trajectory.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="goToWork.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="goToHospital.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="weekend.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -48,15 +39,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="person.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="goToWork.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="goToHospital.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="weekend.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="functions.cpp">

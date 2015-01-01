@@ -7,22 +7,17 @@
 #include "building.h"
 #include "trajectory.h"
 
-#include "goToHospital.h"
-#include "goToWork.h"
-#include "weekend.h"
-
 #include "functions.h"
 ;using namespace std;
 
 
-//next work to do: code the programme to define everyone's home and work
+//following work to do: code the programme to define trajectory at the beginning of a day
 
 
 void main()
 {
 	//test
 
-	
 	//end
 
 	//random
@@ -91,9 +86,9 @@ void main()
 	
 
 	//creation of trajectories
-	vector<GoToWork> GOTOWORK;
-	vector<GoToHospital> GOTOHOSPITAL;
-	vector<Weekend> WEEKEND;
+	vector<Trajectory> GOTOWORK;
+	vector<Trajectory> GOTOHOSPITAL;
+	vector<Trajectory> WEEKEND;
 	cout << "ok"<< endl;
 	GOTOWORK=createGoToWork(GOTOWORK);
 	cout << "ok"<< endl;
@@ -118,6 +113,41 @@ void main()
 
 	//end of test
 
+	//
+	int DAY=0;
+	string NextDay="yes";//we begin with monday
+	while (NextDay=="yes")
+	{
+		DAY++;
+		DAY=DAY%7;
+
+		//choice of trajectory
+		
+
+
+
+		for (int T=0; T<48;	T++)		// T time
+		{
+			//movement
+			
+			//number of person in every building
+
+			//probability to be sick
+
+			//result
+
+		}
+
+
+		NextDay="no";
+		cout << "Do you want to simulate the propagation in the next day? (yes or no)"<< endl;
+		cin >> NextDay;
+	}
+
+
+
 	system("pause");
+
+
 
 };

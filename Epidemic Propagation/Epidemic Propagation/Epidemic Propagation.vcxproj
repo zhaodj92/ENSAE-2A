@@ -13,21 +13,15 @@
   <ItemGroup>
     <ClInclude Include="building.h" />
     <ClInclude Include="functions.h" />
-    <ClInclude Include="goToHospital.h" />
-    <ClInclude Include="goToWork.h" />
     <ClInclude Include="person.h" />
     <ClInclude Include="trajectory.h" />
-    <ClInclude Include="weekend.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="building.cpp" />
     <ClCompile Include="functions.cpp" />
-    <ClCompile Include="goToHospital.cpp" />
-    <ClCompile Include="goToWork.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="person.cpp" />
     <ClCompile Include="trajectory.cpp" />
-    <ClCompile Include="weekend.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DDA2644B-C4C3-4C57-899E-9901C311016C}</ProjectGuid>
