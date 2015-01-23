@@ -58,30 +58,44 @@ void main()
 	cout << "please enter the number of zones you want to create"<< endl;
 	cin >> numOfZones;
 	int BuilingNum=10;						//this variable is the number of buildings which were already created +10
+	vector<int> nHOMES;
+	vector<int> nOFFICES;
+	vector<int> nSTORES;
+	vector<int> nHOSPITALS;
+	vector<int> nSCHOOLS;
+	vector<int> nPARCS;
+	vector<int> nBUSES;
 	for (int i=1;i <= numOfZones;i++ )	//i is zoneID
 	{
 		int j;
 		cout << "please enter the number of HOMES you want to create in zone"<< i << endl;
 		cin >> j;
 		HOMES=createBuildings(HOMES,i,j,BuilingNum);
+		nHOMES.push_back(j);
 		cout << "please enter the number of OFFICES you want to create in zone"<< i << endl;
 		cin >> j;
 		OFFICES=createBuildings(OFFICES,i,j,BuilingNum);
+		nOFFICES.push_back(j);
 		cout << "please enter the number of STORES you want to create in zone"<< i << endl;
 		cin >> j;
 		STORES=createBuildings(STORES,i,j,BuilingNum);
+		nSTORES.push_back(j);
 		cout << "please enter the number of HOSPITALS you want to create in zone"<< i << endl;
 		cin >> j;
 		HOSPITALS=createBuildings(HOSPITALS,i,j,BuilingNum);
+		nHOSPITALS.push_back(j);
 		cout << "please enter the number of SCHOOLS you want to create in zone"<< i << endl;
 		cin >> j;
 		SCHOOLS=createBuildings(SCHOOLS,i,j,BuilingNum);
+		nSCHOOLS.push_back(j);
 		cout << "please enter the number of PARCS you want to create in zone"<< i << endl;
 		cin >> j;
 		PARCS=createBuildings(PARCS,i,j,BuilingNum);
+		nPARCS.push_back(j);
 		cout << "please enter the number of BUSES you want to create in zone"<< i << endl;
 		cin >> j;
 		BUSES=createBuildings(BUSES,i,j,BuilingNum);
+		nBUSES.push_back(j);
 	}
 	
 

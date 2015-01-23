@@ -5,7 +5,6 @@
 
 Building::Building()
 {
-	buildingID = 1;
 }
 
 Building::~Building(void)

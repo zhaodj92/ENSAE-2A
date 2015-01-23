@@ -19,3 +19,5 @@ vector<Person> defineHome_Work(vector<Person>,int,int,int);	//number of Homes, O
 
 Person choiceOfTrajectory(Person,vector<Trajectory>);
 vector<Person> typeOfTrajectory(vector<Person>,int,vector<Trajectory>,vector<Trajectory>,vector<Trajectory>);	//work hospital weekend
+
+vector<int> vectorCumuler(vector<int>);

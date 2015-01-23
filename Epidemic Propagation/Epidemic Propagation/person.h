@@ -18,7 +18,7 @@ public:
 	int y;
 	bool isHealthful;
 	float p;
-	int trajectory[30];
+	int trajectory[32];
 	int homeID;
 	int workID;			//it represents where he works or where is his school if this person is still a student, 0 if retraite
 

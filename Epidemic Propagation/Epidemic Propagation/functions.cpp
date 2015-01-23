@@ -49,13 +49,24 @@ vector<Trajectory> createGoToWork(vector<Trajectory> Vect)
 	for (int k=0;k<=5;k++)
 	{
 		Trajectory a;
-		a.action[k]=1;
-		a.action[k+18]=2;
+		a.action[k]=3;
+		a.action[k+1]=8;
+		a.action[k+2]=1;
+		a.action[k+18]=8;
+		a.action[k+19]=3;
+		a.action[k+20]=2;
 		Vect.push_back(a);
 		Trajectory b;
-		b.action[k]=1;
-		b.action[k+18]=2;
+		b.action[k]=3;
+		b.action[k+1]=8;
+		b.action[k+2]=1;
+		b.action[k+18]=8;
+		b.action[k+19]=3;
+		b.action[k+20]=2;
+		b.action[k+21]=3;
 		b.action[k+22]=4;
+		b.action[k+23]=3;
+		b.action[k+24]=2;
 		Vect.push_back(a);
 	}
 	return Vect;
@@ -70,8 +81,12 @@ vector<Trajectory> createGoToHospital(vector<Trajectory> Vect)
 	Trajectory b;
 	for (int i=12; i<=14;i++)	//go to hospital before 1:00 pm, and go back 2 hours later
 	{
+		b.action[i-1]=3;
+		b.action[i-2]=8;
 		b.action[i]=5;
-		b.action[i+4]=2;
+		b.action[i+4]=8;
+		b.action[i+5]=3;
+		b.action[i+6]=2;
 	}
 	return Vect;
 }
@@ -87,9 +102,24 @@ vector<Trajectory> createWeekend(vector<Trajectory> Vect)
 		Trajectory a;			//suppose that a penson will do only one thing per day
 		Trajectory b;
 		Trajectory c;
+		a.action[i+3]=3;
+		a.action[i+4]=8;
 		a.action[i+5]=6;
+		a.action[i+11]=8;
+		a.action[i+12]=3;
+		a.action[i+13]=2;
+		b.action[i+3]=3;
+		b.action[i+4]=8;
 		b.action[i+5]=4;
+		b.action[i+11]=8;
+		b.action[i+12]=3;
+		b.action[i+13]=2;
+		c.action[i+3]=3;
+		c.action[i+4]=8;
 		c.action[i+5]=7;
+		c.action[i+11]=8;
+		c.action[i+12]=3;
+		c.action[i+13]=2;
 		Vect.push_back(a);
 		Vect.push_back(b);
 		Vect.push_back(c);
@@ -117,13 +147,55 @@ vector<Person> defineHome_Work(vector<Person> P,int H,int O,int S)
 	return P;
 }
 
+vector<int> vectorCumuler(vector<int> V)
+{
+	vector<int> W;
+	W.push_back(V[0]);
+	for (int i=1; i<V.size();i++)
+	{
+		W.push_back(W[i-1]+V[i]);
+	}
+}
 
-Person choiceOfTrajectory(Person P,vector<Trajectory> T)
+
+
+Person choiceOfTrajectory(Person P,vector<Trajectory> T,vector<int> nHOMES,vector<int> nOFFICES,vector<int> nSTORES,vector<int> nHOSPITALS,vector<int> nSCHOOLS,vector<int> nPARCS,vector<int> nBUSES)
 {
 	int n=rand()%(T.size());
-	for (int k=0;k<30;k++)
+	for (int k=0;k<32;k++)
 		{
-			P.trajectory[k]=T[n].action[k];				//define actions of a person
+			if (P.trajectory[k]=0)//T[n].action[k];				//define actions of a person
+			{
+				T[n].action[k]=0;
+			}
+			if (P.trajectory[k]=1)
+			{
+				T[n].action[k]=P.workID;
+			}
+			if (P.trajectory[k]=2)
+			{
+				T[n].action[k]=P.homeID;
+			}
+			if (P.trajectory[k]=3)
+			{
+				T[n].action[k]=;
+			}
+			if (P.trajectory[k]=4)
+			{
+				T[n].action[k]=0;
+			}
+			if (P.trajectory[k]=5)
+			{
+				T[n].action[k]=0;
+			}
+			if (P.trajectory[k]=6)
+			{
+				T[n].action[k]=0;
+			}
+			if (P.trajectory[k]=7)
+			{
+				T[n].action[k]=0;
+			}
 		}
 	return P;
 }
@@ -169,5 +241,5 @@ vector<Person> typeOfTrajectory(vector<Person> P,int D,vector<Trajectory> WO,vec
 				}
 		}
 	}
-
+	return P;
 }
