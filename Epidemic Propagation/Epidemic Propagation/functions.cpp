@@ -1,16 +1,18 @@
 #include "functions.h"
 #include <time.h>
 
-vector<Building> createBuildings(vector<Building> Vect,int i, int j,int BuilingNum)	//zoneID, number of buildings of this type
+vector<Building> createBuildings(vector<Building> Vect,int i, int j)//,int BuilingNum)	//zoneID, number of buildings of this type
 {
 	for (int k=0;k<=j;k++)
 	{
 		Building b;
 		b.zoneID=i;
-		int *pBuilingNum=&BuilingNum;
-		(*pBuilingNum)++;
-		b.buildingID=BuilingNum;
+		//int *pBuilingNum=&BuilingNum;
+		//(*pBuilingNum)++;
+		b.buildingID=&b;//b.buildingID=BuilingNum;
 		Vect.push_back(b);
+		b.numOfSicks=0;
+		b.newSicks=0;
 	}
 	return Vect;
 }
@@ -267,5 +269,31 @@ vector<Person> typeOfTrajectory(vector<Person> P,int D,vector<Trajectory> WO,vec
 				}
 		}
 	}
+	return P;
+}
+
+
+
+
+
+vector<Person> mouvement(vector<Person> P,int T)
+{
+	for (int i=0;i<P.size();i++)
+	{
+		if (P[i].trajectory[T]!=0)
+		{
+			Building* a=P[i].buildingID;
+			Building* b=P[i].trajectory[T];
+			if (P[i].isHealthful==false)
+			{
+				((*a).newSicks)--;
+				((*b).newSicks)++;
+			}
+			((*a).numOfPersons)--;
+			((*b).numOfPersons)++;
+			P[i].buildingID=P[i].trajectory[T];
+		}
+	}
+
 	return P;
 }

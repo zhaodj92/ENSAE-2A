@@ -13,8 +13,10 @@ public:
 	int x;				//coordinate
 	int y;
 	//string type;			//home school bureau store bus...
-	int buildingID;
+	Building* buildingID;			//maybe we should use the adress
 	int numOfSicks;
+	int numOfPersons;
+	int newSicks;
 	//float coefficient;
 	
 	Building();//int,int,string,int,int,float);

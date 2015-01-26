@@ -17,7 +17,9 @@
 void main()
 {
 	//test
-
+	Person c;
+	Person* pc=&c;
+	cout << pc << endl;
 	//end
 
 	//random
@@ -127,7 +129,10 @@ void main()
 
 	//end of test
 
-	//
+	//some persons are already sick
+	//*********************************code*****************************//
+
+
 	int DAY=0;
 	string NextDay="yes";//we begin with monday
 	while (NextDay=="yes")
@@ -143,8 +148,7 @@ void main()
 		for (int T=0; T<48;	T++)		// T time
 		{
 			//movement
-			
-			//number of person in every building
+			VILLIGERS=mouvement(VILLIGERS,T);
 
 			//probability to be sick
 

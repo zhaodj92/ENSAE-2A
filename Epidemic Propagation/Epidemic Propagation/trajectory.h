@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "building.h"
 using namespace std;
 
 //0 no movement		1 office school		2 home		3 bus(home zone)	4 shop(home zone)	5 hospital		6 friend	7 parc

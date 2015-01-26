@@ -20,4 +20,6 @@ vector<Person> defineHome_Work(vector<Person>,int,int,int,vector<Building>,vecto
 Person choiceOfTrajectory(Person,vector<Trajectory>,vector<int>,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>); //nb of stores, homes, stores, hospitals, parcs, buses
 vector<Person> typeOfTrajectory(vector<Person>,int,vector<Trajectory>,vector<Trajectory>,vector<Trajectory>,vector<int>,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>);	//work hospital weekend
 
+vector<Person> mouvement(vector<Person>,int); //time(hour)
+
 vector<int> vectorCumuler(vector<int>);
