@@ -14,9 +14,10 @@ public:
 	string age;			//"child" or "adult" or "old"
 	int zoneID;
 	int buildingID;
-	int x;
-	int y;
+	int homeZone;
+	int anotherZone;		//a person will go to only one another zone
 	bool isHealthful;
+	bool know;				//false if this person don't hnow he's sick
 	float p;
 	int trajectory[32];
 	int homeID;

@@ -81,8 +81,8 @@ vector<Trajectory> createGoToHospital(vector<Trajectory> Vect)
 	Trajectory b;
 	for (int i=12; i<=14;i++)	//go to hospital before 1:00 pm, and go back 2 hours later
 	{
-		b.action[i-1]=3;
-		b.action[i-2]=8;
+		b.action[i-2]=3;
+		b.action[i-1]=8;
 		b.action[i]=5;
 		b.action[i+4]=8;
 		b.action[i+5]=3;
@@ -110,7 +110,7 @@ vector<Trajectory> createWeekend(vector<Trajectory> Vect)
 		a.action[i+13]=2;
 		b.action[i+3]=3;
 		b.action[i+4]=8;
-		b.action[i+5]=4;
+		b.action[i+5]=9;
 		b.action[i+11]=8;
 		b.action[i+12]=3;
 		b.action[i+13]=2;
@@ -130,18 +130,19 @@ vector<Trajectory> createWeekend(vector<Trajectory> Vect)
 
 
 
-vector<Person> defineHome_Work(vector<Person> P,int H,int O,int S)
+vector<Person> defineHome_Work(vector<Person> P,int H,int O,int S,vector<Building> HOMES,vector<Building> OFFICES,vector<Building> SCHOOLS)
 {
 	for(int i=0;i<(P.size());i++)
 	{
-		P[i].homeID=rand()%(H);
+		P[i].homeID=HOMES[rand()%(H)].buildingID;
+		P[i].homeZone=HOMES[rand()%(H)].zoneID;
 		if (P[i].age=="child")
 		{
-			P[i].workID=rand()%(S);
+			P[i].workID=SCHOOLS[rand()%(S)].buildingID;
 		}
 		if (P[i].age=="adult")
 		{
-			P[i].workID=rand()%(O);
+			P[i].workID=OFFICES[rand()%(O)].buildingID;
 		}
 	}
 	return P;
@@ -155,71 +156,96 @@ vector<int> vectorCumuler(vector<int> V)
 	{
 		W.push_back(W[i-1]+V[i]);
 	}
+	return W;
 }
 
 
 
-Person choiceOfTrajectory(Person P,vector<Trajectory> T,vector<int> nHOMES,vector<int> nOFFICES,vector<int> nSTORES,vector<int> nHOSPITALS,vector<int> nSCHOOLS,vector<int> nPARCS,vector<int> nBUSES)
+Person choiceOfTrajectory(Person P,vector<Trajectory> T,vector<int> nSTORES,vector<Building> HOMES,vector<Building> STORES,vector<Building> HOSPITALS,vector<Building> PARCS,vector<Building> BUSES)
 {
-	int n=rand()%(T.size());
+	vector<int> ncSTORES=vectorCumuler(nSTORES);
+	int n=rand()%(T.size());									//choice of the trajectory
+	P.anotherZone=0;
+	vector<int> bus8;
 	for (int k=0;k<32;k++)
 		{
-			if (P.trajectory[k]=0)//T[n].action[k];				//define actions of a person
+			if (T[n].action[k]=0)//T[n].action[k];				//define actions of a person
 			{
-				T[n].action[k]=0;
+				P.trajectory[k]=0;
 			}
-			if (P.trajectory[k]=1)
+			if (T[n].action[k]=1)
 			{
-				T[n].action[k]=P.workID;
+				P.trajectory[k]=P.workID;
 			}
-			if (P.trajectory[k]=2)
+			if (T[n].action[k]=2)
 			{
-				T[n].action[k]=P.homeID;
+				P.trajectory[k]=P.homeID;
 			}
-			if (P.trajectory[k]=3)
+			if (T[n].action[k]=3)
 			{
-				T[n].action[k]=;
+				P.trajectory[k]=BUSES[P.homeZone].buildingID;
 			}
-			if (P.trajectory[k]=4)
+			if (T[n].action[k]=4)
 			{
-				T[n].action[k]=0;
+				P.trajectory[k]=STORES[rand()%(nSTORES[P.homeZone-1])+ncSTORES[P.homeZone-1]].buildingID;	//buildingID of one of the stores which are in the zone of the person's home
 			}
-			if (P.trajectory[k]=5)
+			if (T[n].action[k]=5)
 			{
-				T[n].action[k]=0;
+				int nn=rand()%(HOSPITALS.size());
+				P.trajectory[k]=HOSPITALS[nn].buildingID;
+				P.anotherZone=HOSPITALS[nn].zoneID;
 			}
-			if (P.trajectory[k]=6)
+			if (T[n].action[k]=6)
 			{
-				T[n].action[k]=0;
+				int nn=rand()%(HOMES.size());
+				P.trajectory[k]=HOMES[nn].buildingID;
+				P.anotherZone=HOMES[nn].zoneID;
 			}
-			if (P.trajectory[k]=7)
+			if (T[n].action[k]=7)
 			{
-				T[n].action[k]=0;
+				int nn=rand()%(PARCS.size());
+				P.trajectory[k]=PARCS[nn].buildingID;
+				P.anotherZone=PARCS[nn].zoneID;
 			}
+			if (T[n].action[k]=8)
+			{
+				bus8.push_back(k);
+			}
+			if (T[n].action[k]=9)
+			{
+				int nn=rand()%(STORES.size());
+				P.trajectory[k]=STORES[nn].buildingID;
+				P.anotherZone=STORES[nn].zoneID;
+			}
+			for (int l=0;l<bus8.size();l++)
+			{
+				P.trajectory[k]=BUSES[P.anotherZone].buildingID;		//a person lose one hour in stransport even if his home and his office are in the same zone
+			}
+
 		}
 	return P;
 }
 
 
 
-vector<Person> typeOfTrajectory(vector<Person> P,int D,vector<Trajectory> WO,vector<Trajectory> H,vector<Trajectory>WE)	//work hospital weekend
+vector<Person> typeOfTrajectory(vector<Person> P,int D,vector<Trajectory> WO,vector<Trajectory> H,vector<Trajectory>WE,vector<int> nSTORES,vector<Building> HOMES,vector<Building> STORES,vector<Building> HOSPITALS,vector<Building> PARCS,vector<Building> BUSES)	//work hospital weekend
 {
 	if (D<6);
 	{
 		for (int i=0;i<P.size();i++)
 		{
-			if (P[i].isHealthful==false)			//if sick, go to hospital
+			if (P[i].know==true)			//if he knows he's sick, go to hospital
 			{
-				P[i]=choiceOfTrajectory(P[i],H);
+				P[i]=choiceOfTrajectory(P[i],H,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
 			}
 			else if(P[i].age=="old")
 			{
-				P[i]=choiceOfTrajectory(P[i],WE);
+				P[i]=choiceOfTrajectory(P[i],WE,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
 			}
 
 			else
 			{
-				P[i]=choiceOfTrajectory(P[i],WO);
+				P[i]=choiceOfTrajectory(P[i],WO,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
 			}
 
 		}
@@ -231,13 +257,13 @@ vector<Person> typeOfTrajectory(vector<Person> P,int D,vector<Trajectory> WO,vec
 	{
 		for (int i=0;i<P.size();i++)
 		{
-			if (P[i].isHealthful==false)			//if sick, go to hospital
+			if (P[i].know==true)			//if sick, go to hospital
 				{
-					P[i]=choiceOfTrajectory(P[i],H);
+					P[i]=choiceOfTrajectory(P[i],H,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
 				}
 			else
 				{
-					P[i]=choiceOfTrajectory(P[i],WE);
+					P[i]=choiceOfTrajectory(P[i],WE,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
 				}
 		}
 	}

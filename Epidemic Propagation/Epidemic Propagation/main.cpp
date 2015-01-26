@@ -11,7 +11,7 @@
 ;using namespace std;
 
 
-//following work to do: code the programme to define trajectory at the beginning of a day
+//following work to do: code a hour
 
 
 void main()
@@ -92,10 +92,10 @@ void main()
 		cin >> j;
 		PARCS=createBuildings(PARCS,i,j,BuilingNum);
 		nPARCS.push_back(j);
-		cout << "please enter the number of BUSES you want to create in zone"<< i << endl;
-		cin >> j;
-		BUSES=createBuildings(BUSES,i,j,BuilingNum);
-		nBUSES.push_back(j);
+		//cout << "please enter the number of BUSES you want to create in zone"<< i << endl;
+		//cin >> j;
+		BUSES=createBuildings(BUSES,i,1,BuilingNum);
+		nBUSES.push_back(1);
 	}
 	
 
@@ -112,7 +112,7 @@ void main()
 	cout << "ok" << endl;
 
 	//define everyone's home and work
-	VILLIGERS=defineHome_Work(VILLIGERS,HOMES.size(),OFFICES.size(),SCHOOLS.size());
+	VILLIGERS=defineHome_Work(VILLIGERS,HOMES.size(),OFFICES.size(),SCHOOLS.size(),HOMES,OFFICES,SCHOOLS);
 
 	cout<< "ok" << endl;
 	//test
@@ -137,8 +137,8 @@ void main()
 
 		//choice of trajectory
 		
-
-
+		VILLIGERS=typeOfTrajectory(VILLIGERS,DAY,GOTOWORK,GOTOHOSPITAL,WEEKEND,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
+		
 
 		for (int T=0; T<48;	T++)		// T time
 		{

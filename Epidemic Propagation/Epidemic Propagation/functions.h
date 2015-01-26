@@ -15,9 +15,9 @@ vector<Trajectory> createGoToWork(vector<Trajectory>);
 vector<Trajectory> createGoToHospital(vector<Trajectory>);
 vector<Trajectory> createWeekend(vector<Trajectory>);
 
-vector<Person> defineHome_Work(vector<Person>,int,int,int);	//number of Homes, Offices, Schools
+vector<Person> defineHome_Work(vector<Person>,int,int,int,vector<Building>,vector<Building>,vector<Building>);	//number of Homes, Offices, Schools
 
-Person choiceOfTrajectory(Person,vector<Trajectory>);
-vector<Person> typeOfTrajectory(vector<Person>,int,vector<Trajectory>,vector<Trajectory>,vector<Trajectory>);	//work hospital weekend
+Person choiceOfTrajectory(Person,vector<Trajectory>,vector<int>,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>); //nb of stores, homes, stores, hospitals, parcs, buses
+vector<Person> typeOfTrajectory(vector<Person>,int,vector<Trajectory>,vector<Trajectory>,vector<Trajectory>,vector<int>,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>);	//work hospital weekend
 
 vector<int> vectorCumuler(vector<int>);
