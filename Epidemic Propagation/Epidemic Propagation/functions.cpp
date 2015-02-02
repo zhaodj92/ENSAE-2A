@@ -1,7 +1,7 @@
 #include "functions.h"
 #include <time.h>
 
-vector<Building> createBuildings(vector<Building> Vect,int i, int j)//,int BuilingNum)	//zoneID, number of buildings of this type
+vector<Building> createBuildings(vector<Building> Vect, int i, int j,bool h)//,int BuilingNum)	//zoneID, number of buildings of this type
 {
 	for (int k=0;k<=j;k++)
 	{
@@ -13,6 +13,7 @@ vector<Building> createBuildings(vector<Building> Vect,int i, int j)//,int Buili
 		Vect.push_back(b);
 		b.numOfSicks=0;
 		b.newSicks=0;
+		b.isHospital=h;
 	}
 	return Vect;
 }
@@ -138,6 +139,7 @@ vector<Person> defineHome_Work(vector<Person> P,int H,int O,int S,vector<Buildin
 	{
 		P[i].homeID=HOMES[rand()%(H)].buildingID;
 		P[i].homeZone=HOMES[rand()%(H)].zoneID;
+		P[i].realize=false;
 		if (P[i].age=="child")
 		{
 			P[i].workID=SCHOOLS[rand()%(S)].buildingID;
@@ -236,7 +238,7 @@ vector<Person> typeOfTrajectory(vector<Person> P,int D,vector<Trajectory> WO,vec
 	{
 		for (int i=0;i<P.size();i++)
 		{
-			if (P[i].know==true)			//if he knows he's sick, go to hospital
+			if (P[i].realize==true)			//if he knows he's sick, go to hospital
 			{
 				P[i]=choiceOfTrajectory(P[i],H,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
 			}
@@ -259,7 +261,7 @@ vector<Person> typeOfTrajectory(vector<Person> P,int D,vector<Trajectory> WO,vec
 	{
 		for (int i=0;i<P.size();i++)
 		{
-			if (P[i].know==true)			//if sick, go to hospital
+			if (P[i].realize==true)			//if he knows he's sick, go to hospital
 				{
 					P[i]=choiceOfTrajectory(P[i],H,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
 				}
@@ -276,24 +278,99 @@ vector<Person> typeOfTrajectory(vector<Person> P,int D,vector<Trajectory> WO,vec
 
 
 
-vector<Person> mouvement(vector<Person> P,int T)
+vector<Person> mouvementAndInfected(vector<Person> P,int T,int S)
 {
 	for (int i=0;i<P.size();i++)
 	{
 		if (P[i].trajectory[T]!=0)
 		{
-			Building* a=P[i].buildingID;
-			Building* b=P[i].trajectory[T];
 			if (P[i].isHealthful==false)
 			{
-				((*a).newSicks)--;
-				((*b).newSicks)++;
+				((*P[i].buildingID).newSicks)--;		//before infection
+
 			}
-			((*a).numOfPersons)--;
-			((*b).numOfPersons)++;
+			((*P[i].buildingID).numOfPersons)--;
+			((*P[i].trajectory[T]).numOfPersons)++;
 			P[i].buildingID=P[i].trajectory[T];
+
+			//infection and after movement
+			float p=rand()%101/100.0;
+			if((*P[i].buildingID).isHospital=false)
+			{
+				if (p<0.0001*(*P[i].buildingID).numOfSicks)			//probability to be infected
+				{
+					P[i].isHealthful=false;
+					S++;
+				}
+			}
+
+			if((*P[i].buildingID).isHospital=true)
+			{
+				if (p<0.05)			//probability to be cured
+				{
+					P[i].isHealthful=true;
+					S--;
+				}
+			}
+			
+			if (P[i].isHealthful==false)
+			{
+				((*P[i].trajectory[T]).newSicks)++;
+			}
+
+
 		}
 	}
 
 	return P;
+}
+
+vector<Building> newSicks(vector<Building> B)
+{
+	for (int i=0; i<B.size();i++)
+	{
+		B[i].numOfSicks=B[i].numOfSicks+B[i].newSicks;
+	}
+	return B;
+
+}
+
+vector<Person> createSicks(vector<Person> P,int n)
+{
+	vector<int> A;
+	while (A.size()!=n)
+	{
+		int r=rand()%(P.size());
+		bool t=false;			//r is not an element of A
+		for (int i=0;i<A.size;i++)
+		{
+			if (A[i]==r)
+			{
+				t=true;
+			}
+
+		}
+		if (t=false)
+		{
+			A.push_back(r);
+			P[r].isHealthful=false;
+			((*P[r].buildingID).numOfSicks)++;
+		}
+
+	}
+	return P;
+}
+
+
+vector<Person> realize(vector<Person> P)
+{
+	for (int i=0; i<P.size();i++)
+	{
+		if (P[i].realize==false && P[i].isHealthful==false && rand()%100<20)
+		{
+			P[i].realize=true;
+		}
+
+	}
+
 }

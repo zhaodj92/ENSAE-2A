@@ -18,7 +18,7 @@ public:
 	int homeZone;
 	int anotherZone;		//a person will go to only one another zone
 	bool isHealthful;
-	bool know;				//false if this person don't hnow he's sick
+	bool realize;				//false if this person don't realize he's sick
 	float p;
 	Building* trajectory[32];
 	Building* homeID;

@@ -17,6 +17,7 @@ public:
 	int numOfSicks;
 	int numOfPersons;
 	int newSicks;
+	bool isHospital;
 	//float coefficient;
 	
 	Building();//int,int,string,int,int,float);

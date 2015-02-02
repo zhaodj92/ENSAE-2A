@@ -72,31 +72,31 @@ void main()
 		int j;
 		cout << "please enter the number of HOMES you want to create in zone"<< i << endl;
 		cin >> j;
-		HOMES=createBuildings(HOMES,i,j,BuilingNum);
+		HOMES=createBuildings(HOMES,i,j,false);//BuilingNum);
 		nHOMES.push_back(j);
 		cout << "please enter the number of OFFICES you want to create in zone"<< i << endl;
 		cin >> j;
-		OFFICES=createBuildings(OFFICES,i,j,BuilingNum);
+		OFFICES=createBuildings(OFFICES,i,j,false);//BuilingNum);
 		nOFFICES.push_back(j);
 		cout << "please enter the number of STORES you want to create in zone"<< i << endl;
 		cin >> j;
-		STORES=createBuildings(STORES,i,j,BuilingNum);
+		STORES=createBuildings(STORES,i,j,false);//BuilingNum);
 		nSTORES.push_back(j);
 		cout << "please enter the number of HOSPITALS you want to create in zone"<< i << endl;
 		cin >> j;
-		HOSPITALS=createBuildings(HOSPITALS,i,j,BuilingNum);
+		HOSPITALS=createBuildings(HOSPITALS,i,j,false);//BuilingNum);
 		nHOSPITALS.push_back(j);
 		cout << "please enter the number of SCHOOLS you want to create in zone"<< i << endl;
 		cin >> j;
-		SCHOOLS=createBuildings(SCHOOLS,i,j,BuilingNum);
+		SCHOOLS=createBuildings(SCHOOLS,i,j,false);//BuilingNum);
 		nSCHOOLS.push_back(j);
 		cout << "please enter the number of PARCS you want to create in zone"<< i << endl;
 		cin >> j;
-		PARCS=createBuildings(PARCS,i,j,BuilingNum);
+		PARCS=createBuildings(PARCS,i,j,false);//BuilingNum);
 		nPARCS.push_back(j);
 		//cout << "please enter the number of BUSES you want to create in zone"<< i << endl;
 		//cin >> j;
-		BUSES=createBuildings(BUSES,i,1,BuilingNum);
+		BUSES=createBuildings(BUSES,i,1,false);//BuilingNum);
 		nBUSES.push_back(1);
 	}
 	
@@ -130,6 +130,11 @@ void main()
 	//end of test
 
 	//some persons are already sick
+	cout << "number of sicks" << endl;
+	int SICKS;
+	cin >> SICKS;
+	VILLIGERS=createSicks(VILLIGERS,SICKS);
+
 	//*********************************code*****************************//
 
 
@@ -140,6 +145,9 @@ void main()
 		DAY++;
 		DAY=DAY%7;
 
+		//realize someone is sick
+		VILLIGERS=realize(VILLIGERS);
+
 		//choice of trajectory
 		
 		VILLIGERS=typeOfTrajectory(VILLIGERS,DAY,GOTOWORK,GOTOHOSPITAL,WEEKEND,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
@@ -147,13 +155,20 @@ void main()
 
 		for (int T=0; T<48;	T++)		// T time
 		{
-			//movement
-			VILLIGERS=mouvement(VILLIGERS,T);
+			//movement and infection
+			VILLIGERS=mouvementAndInfected(VILLIGERS,T,SICKS);	//every building has the same infection coefficient
 
-			//probability to be sick
-
+			//new sicks
+			HOMES=newSicks(HOMES);
+			OFFICES=newSicks(OFFICES);
+			STORES=newSicks(STORES);
+			HOSPITALS=newSicks(HOSPITALS);
+			SCHOOLS=newSicks(SCHOOLS);
+			PARCS=newSicks(PARCS);
+			BUSES=newSicks(BUSES);
+			
 			//result
-
+			cout << SICKS << endl;
 		}
 
 
