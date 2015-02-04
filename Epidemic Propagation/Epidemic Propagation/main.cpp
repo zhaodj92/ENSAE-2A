@@ -100,6 +100,34 @@ void main()
 		nBUSES.push_back(1);
 	}
 	
+	for (int i=0; i<HOMES.size();i++)
+	{
+		HOMES[i].buildingID=&HOMES[i];
+	}
+	for (int i=0; i<OFFICES.size();i++)
+	{
+		OFFICES[i].buildingID=&OFFICES[i];
+	}
+	for (int i=0; i<STORES.size();i++)
+	{
+		STORES[i].buildingID=&STORES[i];
+	}
+	for (int i=0; i<HOSPITALS.size();i++)
+	{
+		HOSPITALS[i].buildingID=&HOSPITALS[i];
+	}
+	for (int i=0; i<SCHOOLS.size();i++)
+	{
+		SCHOOLS[i].buildingID=&SCHOOLS[i];
+	}
+	for (int i=0; i<PARCS.size();i++)
+	{
+		PARCS[i].buildingID=&PARCS[i];
+	}
+	for (int i=0; i<BUSES.size();i++)
+	{
+		BUSES[i].buildingID=&BUSES[i];
+	}
 
 	//creation of trajectories
 	vector<Trajectory> GOTOWORK;
@@ -133,7 +161,9 @@ void main()
 	cout << "number of sicks" << endl;
 	int SICKS;
 	cin >> SICKS;
-	VILLIGERS=createSicks(VILLIGERS,SICKS);
+	VILLIGERS=createSicks(VILLIGERS,SICKS);//,HOMES,OFFICES,STORES,HOSPITALS,SCHOOLS,PARCS,BUSES);
+
+	cout << "OK sicks" << endl;
 
 	//*********************************code*****************************//
 

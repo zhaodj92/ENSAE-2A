@@ -26,7 +26,7 @@ public:
 
 	Person();//string,int,int,int,int,bool,float,int,int,int);
 	~Person(void);
-	void createOnePerson(string,Building*,Building*);		//age,homeID,workID
+	//void createOnePerson(string,Building*,Building*);		//age,homeID,workID
 	
 };
 

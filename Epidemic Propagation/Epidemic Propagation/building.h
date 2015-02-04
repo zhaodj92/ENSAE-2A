@@ -22,7 +22,7 @@ public:
 	
 	Building();//int,int,string,int,int,float);
 	~Building(void);
-	void createOneBuiding(int);//,string,float);		// zoneID, coefficient
+	//void createOneBuiding(int);//,string,float);		// zoneID, coefficient
 };
 
 

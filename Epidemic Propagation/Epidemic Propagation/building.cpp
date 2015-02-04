@@ -11,8 +11,8 @@ Building::~Building(void)
 {
 }
 
-void creatOneBuiding(int)
-{
+//void creatOneBuiding(int)
+//{
 
 
-}
+//}

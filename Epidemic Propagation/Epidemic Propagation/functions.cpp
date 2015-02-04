@@ -3,17 +3,19 @@
 
 vector<Building> createBuildings(vector<Building> Vect, int i, int j,bool h)//,int BuilingNum)	//zoneID, number of buildings of this type
 {
-	for (int k=0;k<=j;k++)
+	for (int k=0;k<j;k++)
 	{
 		Building b;
 		b.zoneID=i;
 		//int *pBuilingNum=&BuilingNum;
 		//(*pBuilingNum)++;
-		b.buildingID=&b;//b.buildingID=BuilingNum;
-		Vect.push_back(b);
+		//b.buildingID=&b;//b.buildingID=BuilingNum;
 		b.numOfSicks=0;
 		b.newSicks=0;
+		b.numOfPersons=0;
 		b.isHospital=h;
+		Vect.push_back(b);
+		//Vect[k].buildingID=&Vect[k];
 	}
 	return Vect;
 }
@@ -26,6 +28,8 @@ vector<Person> createPersons(vector<Person> Vect,int c,int a,int o)			//number o
 	{
 		Person person;
 		person.age="child";
+		person.isHealthful=true;
+		person.realize=false;
 		Vect.push_back(person);
 	}
 	//create adults
@@ -33,6 +37,8 @@ vector<Person> createPersons(vector<Person> Vect,int c,int a,int o)			//number o
 	{
 		Person person;
 		person.age="adult";
+		person.isHealthful=true;
+		person.realize=false;
 		Vect.push_back(person);
 	}
 
@@ -40,6 +46,8 @@ vector<Person> createPersons(vector<Person> Vect,int c,int a,int o)			//number o
 	{
 		Person person;
 		person.age="old";
+		person.isHealthful=true;
+		person.realize=false;
 		Vect.push_back(person);
 	}
 	return Vect;
@@ -100,7 +108,7 @@ vector<Trajectory> createWeekend(vector<Trajectory> Vect)
 	Trajectory w;
 	Vect.push_back(w);		//stay at home and do nothing... I always do that... lol
 
-	for (int i=0; i<20;i++)		//between 9:00 am and 19:00 pm, go to friends' home or shopping
+	for (int i=0; i<19;i++)		//between 8:00 am and 19:00 pm, go to friends' home or shopping
 	{
 		Trajectory a;			//suppose that a penson will do only one thing per day
 		Trajectory b;
@@ -138,8 +146,8 @@ vector<Person> defineHome_Work(vector<Person> P,int H,int O,int S,vector<Buildin
 	for(int i=0;i<(P.size());i++)
 	{
 		P[i].homeID=HOMES[rand()%(H)].buildingID;
+		P[i].buildingID=P[i].homeID;		//at first, everyone stay at home
 		P[i].homeZone=HOMES[rand()%(H)].zoneID;
-		P[i].realize=false;
 		if (P[i].age=="child")
 		{
 			P[i].workID=SCHOOLS[rand()%(S)].buildingID;
@@ -335,14 +343,17 @@ vector<Building> newSicks(vector<Building> B)
 
 }
 
-vector<Person> createSicks(vector<Person> P,int n)
+vector<Person> createSicks(vector<Person> P,int n)//,vector<Building> HOMES,vector<Building> OFFICES,vector<Building> STORES,vector<Building> HOSPITALS,vector<Building> SCHOOLS,vector<Building> PARCS,vector<Building> BUSES)
 {
 	vector<int> A;
 	while (A.size()!=n)
 	{
 		int r=rand()%(P.size());
-		bool t=false;			//r is not an element of A
-		for (int i=0;i<A.size;i++)
+		cout << "r" <<endl;
+		cout << r <<endl;
+		bool t=false;			//false if r is not an element of A
+			cout << "OK sicks1" << endl;
+		for (int i=0;i<A.size();i++)
 		{
 			if (A[i]==r)
 			{
@@ -350,13 +361,15 @@ vector<Person> createSicks(vector<Person> P,int n)
 			}
 
 		}
-		if (t=false)
+			cout << t << endl;
+		if (t==false)
 		{
 			A.push_back(r);
 			P[r].isHealthful=false;
 			((*P[r].buildingID).numOfSicks)++;
 		}
-
+			cout << "OK sicks3" << endl;
+			cout << A.size() << endl;
 	}
 	return P;
 }
@@ -372,5 +385,5 @@ vector<Person> realize(vector<Person> P)
 		}
 
 	}
-
+	return P;
 }

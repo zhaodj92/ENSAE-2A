@@ -9,7 +9,7 @@
 
 ;using namespace std;
 
-vector<Building> createBuildings(vector<Building>,int,int,int);		//zoneID, number of buildings of this type
+vector<Building> createBuildings(vector<Building>,int,int,bool);		//zoneID, number of buildings of this type
 vector<Person> createPersons(vector<Person>,int,int,int);		//number of children, adults, odes
 vector<Trajectory> createGoToWork(vector<Trajectory>);
 vector<Trajectory> createGoToHospital(vector<Trajectory>);
@@ -21,7 +21,7 @@ Person choiceOfTrajectory(Person,vector<Trajectory>,vector<int>,vector<Building>
 vector<Person> typeOfTrajectory(vector<Person>,int,vector<Trajectory>,vector<Trajectory>,vector<Trajectory>,vector<int>,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>);	//work hospital weekend
 
 vector<Person> realize(vector<Person>);
-vector<Person> createSicks(vector<Person>,int);
+vector<Person> createSicks(vector<Person>,int);//,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>);
 vector<Person> mouvementAndInfected(vector<Person>,int,int); //time(hour)
 
 vector<int> vectorCumuler(vector<int>);

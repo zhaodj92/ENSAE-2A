@@ -11,7 +11,7 @@ using namespace std;
 class Trajectory
 {
 public:
-	int action[32];			//list of actions the person do at every 30 min  (6:00 am-10:00 pm)
+	int action[32];			//list of actions the person does at every 30 min  (6:00 am-10:00 pm)
 
 	Trajectory();
 	~Trajectory(void);
