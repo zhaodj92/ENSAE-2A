@@ -22,7 +22,7 @@ vector<Person> typeOfTrajectory(vector<Person>,int,vector<Trajectory>,vector<Tra
 
 vector<Person> realize(vector<Person>);
 vector<Person> createSicks(vector<Person>,int);//,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>,vector<Building>);
-vector<Person> mouvementAndInfected(vector<Person>,int,int); //time(hour)
+vector<Person> mouvementAndInfected(vector<Person>,int,int*); //time(hour)
 
 vector<int> vectorCumuler(vector<int>);
 vector<Building> newSicks(vector<Building>);

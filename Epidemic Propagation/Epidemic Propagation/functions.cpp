@@ -163,7 +163,7 @@ vector<Person> defineHome_Work(vector<Person> P,int H,int O,int S,vector<Buildin
 vector<int> vectorCumuler(vector<int> V)
 {
 	vector<int> W;
-	W.push_back(V[0]);
+	W.push_back(0);
 	for (int i=1; i<V.size();i++)
 	{
 		W.push_back(W[i-1]+V[i]);
@@ -195,7 +195,7 @@ Person choiceOfTrajectory(Person P,vector<Trajectory> T,vector<int> nSTORES,vect
 			}
 			if (T[n].action[k]=3)
 			{
-				P.trajectory[k]=BUSES[P.homeZone].buildingID;
+				P.trajectory[k]=BUSES[P.homeZone-1].buildingID;
 			}
 			if (T[n].action[k]=4)
 			{
@@ -231,7 +231,7 @@ Person choiceOfTrajectory(Person P,vector<Trajectory> T,vector<int> nSTORES,vect
 			}
 			for (int l=0;l<bus8.size();l++)
 			{
-				P.trajectory[k]=BUSES[P.anotherZone].buildingID;		//a person lose one hour in stransport even if his home and his office are in the same zone
+				P.trajectory[k]=BUSES[P.anotherZone-1].buildingID;		//a person lose one hour in stransport even if his home and his office are in the same zone
 			}
 
 		}
@@ -286,7 +286,7 @@ vector<Person> typeOfTrajectory(vector<Person> P,int D,vector<Trajectory> WO,vec
 
 
 
-vector<Person> mouvementAndInfected(vector<Person> P,int T,int S)
+vector<Person> mouvementAndInfected(vector<Person> P,int T,int* pS)
 {
 	for (int i=0;i<P.size();i++)
 	{
@@ -305,10 +305,22 @@ vector<Person> mouvementAndInfected(vector<Person> P,int T,int S)
 			float p=rand()%101/100.0;
 			if((*P[i].buildingID).isHospital=false)
 			{
-				if (p<0.0001*(*P[i].buildingID).numOfSicks)			//probability to be infected
+				if (p<0.0001*(*P[i].buildingID).numOfSicks && P[i].age=="adult")			//probability to be infected for a adult
 				{
 					P[i].isHealthful=false;
-					S++;
+					(*pS)++;
+				}
+
+				if (p<0.0003*(*P[i].buildingID).numOfSicks && P[i].age=="child")
+				{
+					P[i].isHealthful=false;
+					(*pS)++;
+				}
+
+				if (p<0.0002*(*P[i].buildingID).numOfSicks && P[i].age=="old")
+				{
+					P[i].isHealthful=false;
+					(*pS)++;
 				}
 			}
 
@@ -317,7 +329,7 @@ vector<Person> mouvementAndInfected(vector<Person> P,int T,int S)
 				if (p<0.05)			//probability to be cured
 				{
 					P[i].isHealthful=true;
-					S--;
+					(*pS)--;
 				}
 			}
 			
@@ -359,7 +371,7 @@ vector<Person> createSicks(vector<Person> P,int n)//,vector<Building> HOMES,vect
 			{
 				t=true;
 			}
-
+			cout << "OK sicks2"<< endl;
 		}
 			cout << t << endl;
 		if (t==false)

@@ -35,13 +35,13 @@ void main()
 	int numOfOlds;
 	cout << "please enter the number of OLDS you want to create"<<endl;
 	cin >> numOfOlds;
-	vector<Person> VILLIGERS;
-	VILLIGERS=createPersons(VILLIGERS,numOfChildren,numOfAdults,numOfOlds);
+	vector<Person> CITIZENS;
+	CITIZENS=createPersons(CITIZENS,numOfChildren,numOfAdults,numOfOlds);
 
 	//test
-	cout << VILLIGERS[3].age<< endl;
-	cout << VILLIGERS[15].age<< endl;
-	cout << VILLIGERS[24].age<< endl;
+	cout << CITIZENS[3].age<< endl;
+	cout << CITIZENS[15].age<< endl;
+	cout << CITIZENS[24].age<< endl;
 
 
 	float n=rand()%101/100.0;
@@ -142,18 +142,18 @@ void main()
 	cout << "ok" << endl;
 
 	//define everyone's home and work
-	VILLIGERS=defineHome_Work(VILLIGERS,HOMES.size(),OFFICES.size(),SCHOOLS.size(),HOMES,OFFICES,SCHOOLS);
+	CITIZENS=defineHome_Work(CITIZENS,HOMES.size(),OFFICES.size(),SCHOOLS.size(),HOMES,OFFICES,SCHOOLS);
 
 	cout<< "ok" << endl;
 	//test
 
-	cout<< VILLIGERS[1].homeID <<endl;
-	cout<< VILLIGERS[2].homeID <<endl;
-	cout<< VILLIGERS[3].homeID <<endl;
-	cout<< VILLIGERS[4].homeID <<endl;
-	cout<< VILLIGERS[5].homeID <<endl;
-	cout<< VILLIGERS[6].homeID <<endl;
-	cout<< VILLIGERS[7].homeID <<endl;
+	cout<< CITIZENS[1].homeID <<endl;
+	cout<< CITIZENS[2].homeID <<endl;
+	cout<< CITIZENS[3].homeID <<endl;
+	cout<< CITIZENS[4].homeID <<endl;
+	cout<< CITIZENS[5].homeID <<endl;
+	cout<< CITIZENS[6].homeID <<endl;
+	cout<< CITIZENS[7].homeID <<endl;
 
 	//end of test
 
@@ -161,7 +161,7 @@ void main()
 	cout << "number of sicks" << endl;
 	int SICKS;
 	cin >> SICKS;
-	VILLIGERS=createSicks(VILLIGERS,SICKS);//,HOMES,OFFICES,STORES,HOSPITALS,SCHOOLS,PARCS,BUSES);
+	CITIZENS=createSicks(CITIZENS,SICKS);//,HOMES,OFFICES,STORES,HOSPITALS,SCHOOLS,PARCS,BUSES);
 
 	cout << "OK sicks" << endl;
 
@@ -176,18 +176,20 @@ void main()
 		DAY=DAY%7;
 
 		//realize someone is sick
-		VILLIGERS=realize(VILLIGERS);
+		CITIZENS=realize(CITIZENS);
 
 		//choice of trajectory
 		
-		VILLIGERS=typeOfTrajectory(VILLIGERS,DAY,GOTOWORK,GOTOHOSPITAL,WEEKEND,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
+		CITIZENS=typeOfTrajectory(CITIZENS,DAY,GOTOWORK,GOTOHOSPITAL,WEEKEND,nSTORES,HOMES,STORES,HOSPITALS,PARCS,BUSES);
 		
 
 		for (int T=0; T<48;	T++)		// T time
 		{
 			//movement and infection
-			VILLIGERS=mouvementAndInfected(VILLIGERS,T,SICKS);	//every building has the same infection coefficient
+			int* pSICKS=&SICKS;
+			CITIZENS=mouvementAndInfected(CITIZENS,T,pSICKS);	//every building has the same infection coefficient
 
+			cout << "movement ok" << endl;
 			//new sicks
 			HOMES=newSicks(HOMES);
 			OFFICES=newSicks(OFFICES);
