@@ -24,7 +24,7 @@ vector<Building> createBuildings(vector<Building> Vect, int i, int j,bool h)//,i
 vector<Person> createPersons(vector<Person> Vect,int c,int a,int o)			//number of children, adults, olds
 {
 	//create children
-	for (int k=0;k<=c;k++)
+	for (int k=0;k<c;k++)
 	{
 		Person person;
 		person.age="child";
@@ -33,7 +33,7 @@ vector<Person> createPersons(vector<Person> Vect,int c,int a,int o)			//number o
 		Vect.push_back(person);
 	}
 	//create adults
-	for (int k=0;k<=a;k++)
+	for (int k=0;k<a;k++)
 	{
 		Person person;
 		person.age="adult";
@@ -42,7 +42,7 @@ vector<Person> createPersons(vector<Person> Vect,int c,int a,int o)			//number o
 		Vect.push_back(person);
 	}
 
-	for (int k=0;k<=o;k++)
+	for (int k=0;k<o;k++)
 	{
 		Person person;
 		person.age="old";
@@ -148,13 +148,20 @@ vector<Person> defineHome_Work(vector<Person> P,int H,int O,int S,vector<Buildin
 		P[i].homeID=HOMES[rand()%(H)].buildingID;
 		P[i].buildingID=P[i].homeID;		//at first, everyone stay at home
 		P[i].homeZone=HOMES[rand()%(H)].zoneID;
+		((*P[i].buildingID).numOfPersons)++;
 		if (P[i].age=="child")
 		{
 			P[i].workID=SCHOOLS[rand()%(S)].buildingID;
+			P[i].anotherZone=(*P[i].workID).zoneID;
 		}
 		if (P[i].age=="adult")
 		{
 			P[i].workID=OFFICES[rand()%(O)].buildingID;
+			P[i].anotherZone=(*P[i].workID).zoneID;
+		}
+		if (P[i].age=="old")
+		{
+			P[i].anotherZone=(*P[i].homeID).zoneID;
 		}
 	}
 	return P;
@@ -177,53 +184,52 @@ Person choiceOfTrajectory(Person P,vector<Trajectory> T,vector<int> nSTORES,vect
 {
 	vector<int> ncSTORES=vectorCumuler(nSTORES);
 	int n=rand()%(T.size());									//choice of the trajectory
-	P.anotherZone=0;
 	vector<int> bus8;
 	for (int k=0;k<32;k++)
 		{
-			if (T[n].action[k]=0)//T[n].action[k];				//define actions of a person
+			if (T[n].action[k]==0)//T[n].action[k];				//define actions of a person
 			{
 				P.trajectory[k]=0;
 			}
-			if (T[n].action[k]=1)
+			if (T[n].action[k]==1)
 			{
 				P.trajectory[k]=P.workID;
 			}
-			if (T[n].action[k]=2)
+			if (T[n].action[k]==2)
 			{
 				P.trajectory[k]=P.homeID;
 			}
-			if (T[n].action[k]=3)
+			if (T[n].action[k]==3)
 			{
 				P.trajectory[k]=BUSES[P.homeZone-1].buildingID;
 			}
-			if (T[n].action[k]=4)
+			if (T[n].action[k]==4)
 			{
 				P.trajectory[k]=STORES[rand()%(nSTORES[P.homeZone-1])+ncSTORES[P.homeZone-1]].buildingID;	//buildingID of one of the stores which are in the zone of the person's home
 			}
-			if (T[n].action[k]=5)
+			if (T[n].action[k]==5)
 			{
 				int nn=rand()%(HOSPITALS.size());
 				P.trajectory[k]=HOSPITALS[nn].buildingID;
 				P.anotherZone=HOSPITALS[nn].zoneID;
 			}
-			if (T[n].action[k]=6)
+			if (T[n].action[k]==6)
 			{
 				int nn=rand()%(HOMES.size());
 				P.trajectory[k]=HOMES[nn].buildingID;
 				P.anotherZone=HOMES[nn].zoneID;
 			}
-			if (T[n].action[k]=7)
+			if (T[n].action[k]==7)
 			{
 				int nn=rand()%(PARCS.size());
 				P.trajectory[k]=PARCS[nn].buildingID;
 				P.anotherZone=PARCS[nn].zoneID;
 			}
-			if (T[n].action[k]=8)
+			if (T[n].action[k]==8)
 			{
 				bus8.push_back(k);
 			}
-			if (T[n].action[k]=9)
+			if (T[n].action[k]==9)
 			{
 				int nn=rand()%(STORES.size());
 				P.trajectory[k]=STORES[nn].buildingID;
@@ -231,7 +237,7 @@ Person choiceOfTrajectory(Person P,vector<Trajectory> T,vector<int> nSTORES,vect
 			}
 			for (int l=0;l<bus8.size();l++)
 			{
-				P.trajectory[k]=BUSES[P.anotherZone-1].buildingID;		//a person lose one hour in stransport even if his home and his office are in the same zone
+				P.trajectory[k]=BUSES[P.anotherZone-1].buildingID;		//a person lose one hour in transport even if his home and his office are in the same zone
 			}
 
 		}
@@ -303,7 +309,7 @@ vector<Person> mouvementAndInfected(vector<Person> P,int T,int* pS)
 
 			//infection and after movement
 			float p=rand()%101/100.0;
-			if((*P[i].buildingID).isHospital=false)
+			if((*P[i].buildingID).isHospital==false)
 			{
 				if (p<0.0001*(*P[i].buildingID).numOfSicks && P[i].age=="adult")			//probability to be infected for a adult
 				{
@@ -324,7 +330,7 @@ vector<Person> mouvementAndInfected(vector<Person> P,int T,int* pS)
 				}
 			}
 
-			if((*P[i].buildingID).isHospital=true)
+			if((*P[i].buildingID).isHospital==true)
 			{
 				if (p<0.05)			//probability to be cured
 				{
@@ -340,18 +346,64 @@ vector<Person> mouvementAndInfected(vector<Person> P,int T,int* pS)
 
 
 		}
+
+		//if no movement
+		if (P[i].trajectory[T]==0)
+		{
+			//infection
+			float p=rand()%101/100.0;
+			if((*P[i].buildingID).isHospital==false)
+			{
+				if (p<0.0001*(*P[i].buildingID).numOfSicks && P[i].age=="adult")			//probability to be infected for a adult
+				{
+					P[i].isHealthful=false;
+					(*pS)++;
+				}
+
+				if (p<0.0003*(*P[i].buildingID).numOfSicks && P[i].age=="child")
+				{
+					P[i].isHealthful=false;
+					(*pS)++;
+				}
+
+				if (p<0.0002*(*P[i].buildingID).numOfSicks && P[i].age=="old")
+				{
+					P[i].isHealthful=false;
+					(*pS)++;
+				}
+			}
+
+			if((*P[i].buildingID).isHospital==true)
+			{
+				if (p<0.05)			//probability to be cured
+				{
+					P[i].isHealthful=true;
+					(*pS)--;
+				}
+			}
+			
+			if (P[i].isHealthful==false)
+			{
+				((*P[i].buildingID).newSicks)++;
+			}
+
+
+		}
+
+		//cout << "after infection" << endl;
+		//cout << (*P[i].buildingID).numOfPersons << endl;
 	}
 
 	return P;
 }
 
-vector<Building> newSicks(vector<Building> B)
+void newSicks(vector<Building*> B)
 {
 	for (int i=0; i<B.size();i++)
 	{
-		B[i].numOfSicks=B[i].numOfSicks+B[i].newSicks;
+		(*B[i]).numOfSicks=(*B[i]).numOfSicks+(*B[i]).newSicks;
+		(*B[i]).newSicks=0;
 	}
-	return B;
 
 }
 

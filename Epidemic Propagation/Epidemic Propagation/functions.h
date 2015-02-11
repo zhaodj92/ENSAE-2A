@@ -25,4 +25,4 @@ vector<Person> createSicks(vector<Person>,int);//,vector<Building>,vector<Buildi
 vector<Person> mouvementAndInfected(vector<Person>,int,int*); //time(hour)
 
 vector<int> vectorCumuler(vector<int>);
-vector<Building> newSicks(vector<Building>);
+void newSicks(vector<Building*>);
