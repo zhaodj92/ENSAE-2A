@@ -13,13 +13,13 @@ class Person
 public:
 	//int id;				//identification of the person	//useless
 	string age;			//"child" or "adult" or "old"
-	int zoneID;
+	//int zoneID;
 	Building* buildingID;
 	int homeZone;
 	int anotherZone;		//a person will go to only one another zone
 	bool isHealthful;
 	bool realize;				//false if this person don't realize he's sick
-	float p;
+	//float p;
 	Building* trajectory[32];
 	Building* homeID;
 	Building* workID;			//it represents where he works or where is his school if this person is still a student, 0 if retraite

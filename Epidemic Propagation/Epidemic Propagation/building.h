@@ -10,8 +10,8 @@ class Building
 {
 public:
 	int zoneID;
-	int x;				//coordinate
-	int y;
+	//int x;				//coordinate
+	//int y;
 	//string type;			//home school bureau store bus...
 	Building* buildingID;			//maybe we should use the adress
 	int numOfSicks;

@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <time.h>
+#include <fstream>
 
 #include "person.h"	
 #include "building.h"
@@ -14,7 +15,7 @@
 //following work to do: code a hour
 
 
-void main()
+int main()
 {
 	//test
 	Person c;
@@ -26,28 +27,18 @@ void main()
 	srand( (unsigned)time( NULL ) );
 	//beginning of code
 	//city size
-	int numOfChildren=10;
+	int numOfChildren=10000;
 	cout << "please enter the number of CHILDREN you want to create"<<endl;
 	//////cin >> numOfChildren;
-	int numOfAdults=10;
+	int numOfAdults=30000;
 	cout << "please enter the number of ADULTS you want to create"<<endl;
 	/////cin >> numOfAdults;
-	int numOfOlds=10;
+	int numOfOlds=8000;
 	cout << "please enter the number of OLDS you want to create"<<endl;
 	/////cin >> numOfOlds;
 	vector<Person> CITIZENS;
 	CITIZENS=createPersons(CITIZENS,numOfChildren,numOfAdults,numOfOlds);
 
-	//test
-	cout << CITIZENS[3].age<< endl;
-	cout << CITIZENS[15].age<< endl;
-	cout << CITIZENS[24].age<< endl;
-
-
-	float n=rand()%101/100.0;
-	cout << n<<endl;
-
-	//end of test
 
 	vector<Building> HOMES;
 	vector<Building> OFFICES;
@@ -59,7 +50,7 @@ void main()
 	int numOfZones=1;
 	cout << "please enter the number of zones you want to create"<< endl;
 	/////cin >> numOfZones;
-	int BuilingNum=10;						//this variable is the number of buildings which were already created +10
+	//int BuilingNum=10;						//this variable is the number of buildings which were already created +10
 	vector<int> nHOMES;
 	vector<int> nOFFICES;
 	vector<int> nSTORES;
@@ -69,19 +60,18 @@ void main()
 	vector<int> nBUSES;
 	for (int i=1;i <= numOfZones;i++ )	//i is zoneID
 	{
-		int j=5;
-		cout << "please enter the number of HOMES you want to create in zone"<< i << endl;
-		/////cin >> j;
+		int j=1000;
 		HOMES=createBuildings(HOMES,i,j,false);//BuilingNum);
 		nHOMES.push_back(j);
 		cout << "please enter the number of OFFICES you want to create in zone"<< i << endl;
 		/////cin >> j;
+		j=80;
 		OFFICES=createBuildings(OFFICES,i,j,false);//BuilingNum);
 		nOFFICES.push_back(j);
 		cout << "please enter the number of STORES you want to create in zone"<< i << endl;
 		/////cin >> j;
 
-		j=1;
+		j=10;
 		STORES=createBuildings(STORES,i,j,false);//BuilingNum);
 		nSTORES.push_back(j);
 		cout << "please enter the number of HOSPITALS you want to create in zone"<< i << endl;
@@ -90,7 +80,7 @@ void main()
 		nHOSPITALS.push_back(j);
 		cout << "please enter the number of SCHOOLS you want to create in zone"<< i << endl;
 		/////cin >> j;
-		SCHOOLS=createBuildings(SCHOOLS,i,j,false);//BuilingNum);
+		SCHOOLS=createBuildings(SCHOOLS,i,20,false);//BuilingNum);
 		nSCHOOLS.push_back(j);
 		cout << "please enter the number of PARCS you want to create in zone"<< i << endl;
 		/////cin >> j;
@@ -112,32 +102,32 @@ void main()
 	for (int i=0; i<OFFICES.size();i++)
 	{
 		OFFICES[i].buildingID=&OFFICES[i];
-		ALLBUILDINGS.push_back(&HOMES[i]);
+		ALLBUILDINGS.push_back(&OFFICES[i]);
 	}
 	for (int i=0; i<STORES.size();i++)
 	{
 		STORES[i].buildingID=&STORES[i];
-		ALLBUILDINGS.push_back(&HOMES[i]);
+		ALLBUILDINGS.push_back(&STORES[i]);
 	}
 	for (int i=0; i<HOSPITALS.size();i++)
 	{
 		HOSPITALS[i].buildingID=&HOSPITALS[i];
-		ALLBUILDINGS.push_back(&HOMES[i]);
+		ALLBUILDINGS.push_back(&HOSPITALS[i]);
 	}
 	for (int i=0; i<SCHOOLS.size();i++)
 	{
 		SCHOOLS[i].buildingID=&SCHOOLS[i];
-		ALLBUILDINGS.push_back(&HOMES[i]);
+		ALLBUILDINGS.push_back(&SCHOOLS[i]);
 	}
 	for (int i=0; i<PARCS.size();i++)
 	{
 		PARCS[i].buildingID=&PARCS[i];
-		ALLBUILDINGS.push_back(&HOMES[i]);
+		ALLBUILDINGS.push_back(&PARCS[i]);
 	}
 	for (int i=0; i<BUSES.size();i++)
 	{
 		BUSES[i].buildingID=&BUSES[i];
-		ALLBUILDINGS.push_back(&HOMES[i]);
+		ALLBUILDINGS.push_back(&BUSES[i]);
 	}
 
 	//creation of trajectories
@@ -165,6 +155,9 @@ void main()
 
 	//*********************************code*****************************//
 
+	//save the result as txt file
+	ofstream SaveFile;
+	SaveFile.open("result.txt");
 
 	int DAY=0;
 	string NextDay="yes";//we begin with monday
@@ -187,13 +180,13 @@ void main()
 
 			CITIZENS=mouvementAndInfected(CITIZENS,T,pSICKS);	//every building has the same infection coefficient
 
-			cout << "T" << endl;
-			cout << T << endl;
 			//new sicks
 			newSicks(ALLBUILDINGS);
 			
 			//result
 			cout << SICKS << endl;
+			SaveFile << SICKS;
+			SaveFile <<"\r";
 		}
 
 
@@ -202,10 +195,11 @@ void main()
 		cin >> NextDay;
 	}
 
-
+	
+	SaveFile.close();
 
 	system("pause");
 
 
-
+	return 0;
 };
