@@ -1,7 +1,7 @@
 #include "functions.h"
 #include <time.h>
 
-vector<Building> createBuildings(vector<Building> Vect, int i, int j,bool h)//,int BuilingNum)	//zoneID, number of buildings of this type
+vector<Building> createBuildings(vector<Building> Vect, int i, int j,bool h)	//zoneID, number of buildings of this type
 {
 	for (int k=0;k<j;k++)
 	{
