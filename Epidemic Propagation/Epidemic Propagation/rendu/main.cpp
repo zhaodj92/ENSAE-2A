@@ -56,6 +56,8 @@ int main()
 	for (int i=1;i <= numOfZones;i++ )	//i is zoneID
 	{
 		int j;
+		cout << "please enter the number of HOMES you want to create in zone"<< i << endl;
+		cin >> j;
 		HOMES=createBuildings(HOMES,i,j,false);//BuilingNum);
 		nHOMES.push_back(j);
 		cout << "please enter the number of OFFICES you want to create in zone"<< i << endl;
@@ -124,19 +126,15 @@ int main()
 	vector<Trajectory> GOTOWORK;
 	vector<Trajectory> GOTOHOSPITAL;
 	vector<Trajectory> WEEKEND;
-	cout << "ok"<< endl;
 	GOTOWORK=createGoToWork(GOTOWORK);
-	cout << "ok"<< endl;
 	GOTOHOSPITAL=createGoToHospital(GOTOHOSPITAL);
-	cout << "ok"<< endl;
 	WEEKEND=createWeekend(WEEKEND);
-	cout << "ok" << endl;
 
 	//define everyone's home and work
 	CITIZENS=defineHome_Work(CITIZENS,HOMES.size(),OFFICES.size(),SCHOOLS.size(),HOMES,OFFICES,SCHOOLS);
 
 	//some persons are already sick
-	cout << "number of sicks" << endl;
+	cout << "please enter the number of sicks you want to create" << endl;
 	int SICKS;
 	cin >> SICKS;
 	CITIZENS=createSicks(CITIZENS,SICKS);
