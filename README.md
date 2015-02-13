@@ -1,3 +1,3 @@
 ENSAE-2A
 ========
-haha
+Voici notre programme de simulation de la propagation d'une épidémie dans une ville.
