@@ -17,25 +17,20 @@
 
 int main()
 {
-	//test
-	Person c;
-	Person* pc=&c;
-	cout << pc << endl;
-	//end
-
+	
 	//random
 	srand( (unsigned)time( NULL ) );
 	//beginning of code
 	//city size
-	int numOfChildren=10000;
+	int numOfChildren;
 	cout << "please enter the number of CHILDREN you want to create"<<endl;
-	//////cin >> numOfChildren;
-	int numOfAdults=30000;
+	cin >> numOfChildren;
+	int numOfAdults;
 	cout << "please enter the number of ADULTS you want to create"<<endl;
-	/////cin >> numOfAdults;
-	int numOfOlds=8000;
+	cin >> numOfAdults;
+	int numOfOlds;
 	cout << "please enter the number of OLDS you want to create"<<endl;
-	/////cin >> numOfOlds;
+	cin >> numOfOlds;
 	vector<Person> CITIZENS;
 	CITIZENS=createPersons(CITIZENS,numOfChildren,numOfAdults,numOfOlds);
 
@@ -47,10 +42,10 @@ int main()
 	vector<Building> SCHOOLS;
 	vector<Building> PARCS;
 	vector<Building> BUSES;
-	int numOfZones=1;
+	int numOfZones;
 	cout << "please enter the number of zones you want to create"<< endl;
-	/////cin >> numOfZones;
-	//int BuilingNum=10;						//this variable is the number of buildings which were already created +10
+	cin >> numOfZones;
+
 	vector<int> nHOMES;
 	vector<int> nOFFICES;
 	vector<int> nSTORES;
@@ -60,34 +55,29 @@ int main()
 	vector<int> nBUSES;
 	for (int i=1;i <= numOfZones;i++ )	//i is zoneID
 	{
-		int j=1000;
+		int j;
 		HOMES=createBuildings(HOMES,i,j,false);//BuilingNum);
 		nHOMES.push_back(j);
 		cout << "please enter the number of OFFICES you want to create in zone"<< i << endl;
-		/////cin >> j;
-		j=80;
+		cin >> j;
 		OFFICES=createBuildings(OFFICES,i,j,false);//BuilingNum);
 		nOFFICES.push_back(j);
 		cout << "please enter the number of STORES you want to create in zone"<< i << endl;
-		/////cin >> j;
-
-		j=10;
+		cin >> j;
 		STORES=createBuildings(STORES,i,j,false);//BuilingNum);
 		nSTORES.push_back(j);
 		cout << "please enter the number of HOSPITALS you want to create in zone"<< i << endl;
-		/////cin >> j;
+		cin >> j;
 		HOSPITALS=createBuildings(HOSPITALS,i,j,true);//BuilingNum);
 		nHOSPITALS.push_back(j);
 		cout << "please enter the number of SCHOOLS you want to create in zone"<< i << endl;
-		/////cin >> j;
-		SCHOOLS=createBuildings(SCHOOLS,i,20,false);//BuilingNum);
+		cin >> j;
+		SCHOOLS=createBuildings(SCHOOLS,i,j,false);//BuilingNum);
 		nSCHOOLS.push_back(j);
 		cout << "please enter the number of PARCS you want to create in zone"<< i << endl;
-		/////cin >> j;
+		cin >> j;
 		PARCS=createBuildings(PARCS,i,j,false);//BuilingNum);
 		nPARCS.push_back(j);
-		//cout << "please enter the number of BUSES you want to create in zone"<< i << endl;
-		//cin >> j;
 		BUSES=createBuildings(BUSES,i,1,false);//BuilingNum);
 		nBUSES.push_back(1);
 	}
@@ -149,7 +139,7 @@ int main()
 	cout << "number of sicks" << endl;
 	int SICKS;
 	cin >> SICKS;
-	CITIZENS=createSicks(CITIZENS,SICKS);//,HOMES,OFFICES,STORES,HOSPITALS,SCHOOLS,PARCS,BUSES);
+	CITIZENS=createSicks(CITIZENS,SICKS);
 	int* pSICKS=&SICKS;
 	cout << "OK sicks" << endl;
 

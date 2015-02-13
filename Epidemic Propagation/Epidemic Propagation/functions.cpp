@@ -7,15 +7,11 @@ vector<Building> createBuildings(vector<Building> Vect, int i, int j,bool h)//,i
 	{
 		Building b;
 		b.zoneID=i;
-		//int *pBuilingNum=&BuilingNum;
-		//(*pBuilingNum)++;
-		//b.buildingID=&b;//b.buildingID=BuilingNum;
 		b.numOfSicks=0;
 		b.newSicks=0;
 		b.numOfPersons=0;
 		b.isHospital=h;
 		Vect.push_back(b);
-		//Vect[k].buildingID=&Vect[k];
 	}
 	return Vect;
 }
@@ -187,7 +183,7 @@ Person choiceOfTrajectory(Person P,vector<Trajectory> T,vector<int> nSTORES,vect
 	int n=rand()%(T.size());									//choice of the trajectory
 	for (int k=0;k<32;k++)
 		{
-			if (T[n].action[k]==0)//T[n].action[k];				//define actions of a person
+			if (T[n].action[k]==0)								//define actions of a person
 			{
 				P.trajectory[k]=0;
 			}
@@ -304,22 +300,22 @@ vector<Person> mouvementAndInfected(vector<Person> P,int T,int* pS)
 			P[i].buildingID=P[i].trajectory[T];
 
 			//infection and after movement
-			float p=rand()%100001/100000.0;
+			float p=rand()%100000001/100000000.0;
 			if((*P[i].buildingID).isHospital==false && P[i].isHealthful==true)
 			{
-				if (p<0.00000001*(*P[i].buildingID).numOfSicks && P[i].age=="adult")			//probability to be infected for a adult
+				if (p<0.0000001*(*P[i].buildingID).numOfSicks && P[i].age=="adult")			//probability to be infected for a adult
 				{
 					P[i].isHealthful=false;
 					(*pS)++;
 				}
 
-				if (p<0.00000002*(*P[i].buildingID).numOfSicks && P[i].age=="child")
+				if (p<0.0000002*(*P[i].buildingID).numOfSicks && P[i].age=="child")
 				{
 					P[i].isHealthful=false;
 					(*pS)++;
 				}
 
-				if (p<0.000000015*(*P[i].buildingID).numOfSicks && P[i].age=="old")
+				if (p<0.00000015*(*P[i].buildingID).numOfSicks && P[i].age=="old")
 				{
 					P[i].isHealthful=false;
 					(*pS)++;
@@ -347,24 +343,24 @@ vector<Person> mouvementAndInfected(vector<Person> P,int T,int* pS)
 		if (P[i].trajectory[T]==0)
 		{
 			//infection
-			float p=rand()%100001/100000.0;
+			float p=rand()%100000001/100000000.0;
 			if((*P[i].buildingID).isHospital==false && P[i].isHealthful==true)
 			{
-				if (p<0.00000001*(*P[i].buildingID).numOfSicks && P[i].age=="adult")			//probability to be infected for a adult
+				if (p<0.0000001*(*P[i].buildingID).numOfSicks && P[i].age=="adult")			//probability to be infected for a adult
 				{
 					P[i].isHealthful=false;
 					(*pS)++;
 					((*P[i].buildingID).newSicks)++;
 				}
 
-				if (p<0.00000002*(*P[i].buildingID).numOfSicks && P[i].age=="child")
+				if (p<0.0000002*(*P[i].buildingID).numOfSicks && P[i].age=="child")
 				{
 					P[i].isHealthful=false;
 					(*pS)++;
 					((*P[i].buildingID).newSicks)++;
 				}
 
-				if (p<0.000000015*(*P[i].buildingID).numOfSicks && P[i].age=="old")
+				if (p<0.00000015*(*P[i].buildingID).numOfSicks && P[i].age=="old")
 				{
 					P[i].isHealthful=false;
 					(*pS)++;
@@ -384,8 +380,6 @@ vector<Person> mouvementAndInfected(vector<Person> P,int T,int* pS)
 			
 		}
 
-		//cout << "after infection" << endl;
-		//cout << (*P[i].buildingID).numOfPersons << endl;
 	}
 
 	return P;
@@ -401,7 +395,7 @@ void newSicks(vector<Building*> B)
 
 }
 
-vector<Person> createSicks(vector<Person> P,int n)//,vector<Building> HOMES,vector<Building> OFFICES,vector<Building> STORES,vector<Building> HOSPITALS,vector<Building> SCHOOLS,vector<Building> PARCS,vector<Building> BUSES)
+vector<Person> createSicks(vector<Person> P,int n)
 {
 	vector<int> A;
 	while (A.size()!=n)
