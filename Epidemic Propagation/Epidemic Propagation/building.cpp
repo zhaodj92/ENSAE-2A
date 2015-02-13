@@ -10,9 +10,3 @@ Building::Building()
 Building::~Building(void)
 {
 }
-
-//void creatOneBuiding(int)
-//{
-
-
-//}
