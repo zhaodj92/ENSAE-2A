@@ -103,7 +103,7 @@ vector<Trajectory> createGoToHospital(vector<Trajectory> Vect)
 vector<Trajectory> createWeekend(vector<Trajectory> Vect)
 {
 	Trajectory w;
-	Vect.push_back(w);		//stay at home and do nothing... I always do that... lol
+	Vect.push_back(w);		//stay at home and do nothing
 
 	for (int i=0; i<19;i++)		//between 8:00 am and 19:00 pm, go to friends' home or shopping
 	{
